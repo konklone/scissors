@@ -6,5 +6,6 @@ import os
 #get a path to the scissors module
 path = os.path.dirname(scissors.__file__)
 args = ["fab","-f",os.path.join(path,"fabfile")]
-args += sys.argv
+args += sys.argv[1:]
+print args
 subprocess.call(args)
