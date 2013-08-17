@@ -2,8 +2,4 @@
 #this script installs scissors
 set -e
 apt-get install -y python-pip python-dev unzip
-pip install pip git+https://github.com/drewcrawford/scissors.git
-#wget https://github.com/drewcrawford/scissors/archive/master.zip
-#unzip master.zip -d .
-#cd scissors-master
-#python setup.py install
+pip install https://github.com/drewcrawford/scissors/zipball/master
