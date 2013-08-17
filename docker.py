@@ -103,6 +103,8 @@ def install_docker():
 	run("modprobe aufs")
 	run("apt-get install curl")
 	run("wget http://get.docker.io -O - | bash")
+	run("groupadd docker")
+	run("gpasswd -a deploy docker")
 	init_setup()
 
 	# https://github.com/dotcloud/docker/issues/431

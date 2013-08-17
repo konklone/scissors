@@ -1,0 +1,30 @@
+#!/bin/bash
+
+cc_red="$\033[0;31m"
+cc_normal="\033[m\017"
+cc_green="\033[0;32m"
+set -e
+echo "Bob: Hello, I am Bob, and I will be your builder today."
+GIT_WORK_TREE=../work git checkout -f
+TAGNAME=$(git log | wc -l)
+
+cd ../work
+PROJECT_NAME=$(pwd | xargs dirname | xargs basename)
+IMAGE_NAME=drewcrawford/${PROJECT_NAME}:${TAGNAME} 
+
+docker build -t $IMAGE_NAME .
+echo "Bob: built successfully."
+
+cd ..
+if [ -a CONTAINER_ID ]
+then
+	echo "Bob: shutting down old container..."
+	CONTAINER_ID=$( cat CONTAINER_ID )
+	docker stop -t 10 $CONTAINER_ID
+	rm CONTAINER_ID
+fi
+
+echo "Bob: bringing up container..."
+docker run -cidfile=CONTAINER_ID -d $IMAGE_NAME
+CONTAINER_ID=$( cat CONTAINER_ID )
+echo $(docker ps | grep $CONTAINER_ID)
