@@ -21,7 +21,7 @@ def kernel_upgrade():
 	util.append("deb-src http://security.debian.org/ testing/updates main non-free","/etc/apt/sources.list")
 	util.append('APT::Default-Release "stable";',"/etc/apt/apt.conf.d/50usestable.conf")
 	run("apt-get update")
-	run("apt-get install -t testing linux-image-amd64 firmware-linux-nonfree")
+	run("apt-get install -t testing -y linux-image-amd64 firmware-linux-nonfree")
 	print "A reboot will be required."
 	run("shutdown -r now")
 
@@ -101,10 +101,11 @@ def install_docker():
 
 	kernel_upgrade()
 	run("modprobe aufs")
-	run("apt-get install curl")
+	util.debian_install("curl")
 	run("wget http://get.docker.io -O - | bash")
 	run("groupadd docker")
 	run("gpasswd -a deploy docker")
+
 	init_setup()
 
 	# https://github.com/dotcloud/docker/issues/431

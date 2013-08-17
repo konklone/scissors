@@ -42,7 +42,7 @@ def setupDeployUser():
 	util.append("deploy  ALL=(ALL) ALL","/etc/sudoers")
 
 	#configure AllowUsers
-	util.append("AllowUsers root deploy","/etc/ssh/sshd_config")
+	util.append("AllowUsers root deploy vagrant","/etc/ssh/sshd_config")
 
 	run('service ssh restart')
 	
