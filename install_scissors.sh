@@ -2,6 +2,7 @@
 #this script installs scissors
 set -e
 apt-get install bzip2
+apt-get install build-essential
 wget http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2
 tar -xf Python-3.3.2.tar.bz2
 cd Python-3.3.2/
