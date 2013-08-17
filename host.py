@@ -6,9 +6,9 @@ import util
 
 def config_scissors_server():
     import harden
-    #harden.harden()
+    harden.harden()
     import docker
-    #docker.install_docker()
+    docker.install_docker()
     util.install_git()
 
 def add_remote(gitrepo,name):
