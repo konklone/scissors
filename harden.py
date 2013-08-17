@@ -9,7 +9,7 @@ def upgrade():
 	run("apt-get upgrade")
 
 def autoupgrade():
-	run("apt-get install unattended-upgrades")
+	util.debian_install("unattended-upgrades")
 	util.putstring("""APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
@@ -17,12 +17,12 @@ APT::Periodic::Unattended-Upgrade "1";""","/etc/apt/apt.conf.d/10periodic")
 
 
 def firewall():
-	run("apt-get install ufw")
+	util.debian_install("ufw")
 	run("ufw allow 22")
 	run("ufw enable")
 
 def logwatch():
-	run("apt-get install logwatch")
+	util.debian_install("logwatch")
 	util.append("/usr/sbin/logwatch --output mail --mailto test@gmail.com --detail high","/etc/cron.daily/00logwatch")
 
 
@@ -49,8 +49,7 @@ def setupDeployUser():
 def harden():
 	upgrade()
 	autoupgrade()
-
-	run("apt-get install fail2ban")
+	util.debian_install("fail2ban")
 
 
 	print "attempting to configure key-based auth for root..."
