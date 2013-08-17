@@ -1,3 +1,4 @@
+# The contents of this file are licensed to you under the Reciprical Public License (RPL).  See the LICENSE file for details.
 from fabric.api import run, sudo, env, settings, local
 from fabric.context_managers import cd
 import fabric
@@ -95,6 +96,7 @@ esac""", "/etc/init.d/docker")
     	run("chmod +x /etc/init.d/docker")
 
 
+
 def install_docker():
 
 	kernel_upgrade()
@@ -102,6 +104,13 @@ def install_docker():
 	run("apt-get install curl")
 	run("wget http://get.docker.io -O - | bash")
 	init_setup()
+
+	# https://github.com/dotcloud/docker/issues/431
+	util.append("none        /cgroup        cgroup        defaults    0    0","/etc/fstab")
+	run("mkdir -p /cgroup")
+	run("mount /cgroup")
+
+	run("sysctl -w net.ipv4.ip_forward=1")
 
 	run("service docker start")
 	

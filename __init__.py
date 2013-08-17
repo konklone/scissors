@@ -1,9 +1,13 @@
+# The contents of this file are licensed to you under the Reciprical Public License (RPL).  See the LICENSE file for details.
+#Exhibit B notice
+print "Contains code from scissors, (C) 2013 Drew Crawford.  https://github.com/drewcrawford/scissors"
 from fabric.api import run, sudo, env, settings, local
 from fabric.context_managers import cd
 from util import putstring
 import fabric
 env.use_ssh_config = True
 DEBIAN = "debian"
+
 
 def what_system():
     if run("ls /etc | grep debian_version").find("debian_version") != -1:

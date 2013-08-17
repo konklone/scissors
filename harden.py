@@ -1,3 +1,4 @@
+# The contents of this file are licensed to you under the Reciprical Public License (RPL).  See the LICENSE file for details.
 from fabric.api import run, sudo, env, settings, local
 from fabric.context_managers import cd
 import fabric

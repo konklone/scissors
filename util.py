@@ -1,3 +1,4 @@
+# The contents of this file are licensed to you under the Reciprical Public License (RPL).  See the LICENSE file for details.
 def putstring(what, where):
     import StringIO
     from fabric.api import put
