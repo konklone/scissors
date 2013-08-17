@@ -1,5 +1,6 @@
 from fabric.api import run, sudo, env, settings, local
 from fabric.context_managers import cd
+from util import putstring
 import fabric
 env.use_ssh_config = True
 DEBIAN = "debian"
@@ -76,10 +77,7 @@ def debian_upgrade():
     sudo('apt-get update')
     sudo('apt-get -y upgrade')
 
-def putstring(what, where):
-    import StringIO
-    from fabric.api import put
-    put(StringIO.StringIO(what), where)
+
 
 def code_drop(WORKING_TREE):
     GIT_REPO=WORKING_TREE+"/git"
