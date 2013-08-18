@@ -26,6 +26,9 @@ setup(
 		"Topic :: System :: Installation/Setup",
         "Operating System :: POSIX :: Linux"
     ],
+    package_data = {
+        '': ['*.drop'],
+    },
     scripts=["scripts/scissors"],
     install_requires=['fabric >= 1.7']
 )

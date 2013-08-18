@@ -13,10 +13,15 @@ def config_scissors_server():
 
 def add_remote(gitrepo,name):
     with settings(warn_only=True):
+        assert len(env.hosts)==1
         user = run("whoami")
         if user != "deploy":
             print "Error, try running as deploy user"
             return
+        import os.path
+        print 'env',env
+        gitrepo = os.path.expanduser(gitrepo)
+        gitrepo = os.path.abspath(gitrepo)
         bname = run("basename {GITREPO}".format(GITREPO=gitrepo))+"-"+name
         print "bname is",bname
         namepath = "~/deploy/{NAME}".format(NAME=bname)
@@ -27,10 +32,13 @@ def add_remote(gitrepo,name):
         run("mkdir {NAMEPATH}/work".format(NAMEPATH=namepath))
         with cd("{NAMEPATH}/bare".format(NAMEPATH=namepath)):
             run("git init --bare")
-    drop = open("scissors.drop").read()
+    import os.path
+    scissors_drop = os.path.join(os.path.dirname(__file__),"scissors.drop")
+    drop = open(scissors_drop).read()
     util.putstring(drop,"{NAMEPATH}/bare/hooks/post-receive".format(NAMEPATH=namepath))
     run("chmod +x {NAMEPATH}/bare/hooks/post-receive".format(NAMEPATH=namepath))
-    local("cd {GITREPO} && git remote add {NAME} deploy@{SERVER}:{NAMEPATH}/bare".format(GITREPO=gitrepo,NAME=name,NAMEPATH=namepath,SERVER=env.host))
+    print "host is",env.hosts[0]
+    local("cd {GITREPO} && git remote add {NAME} deploy@{SERVER}:{NAMEPATH}/bare".format(GITREPO=gitrepo,NAME=name,NAMEPATH=namepath,SERVER=env.hosts[0]))
 
 
 

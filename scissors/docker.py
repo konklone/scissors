@@ -94,6 +94,7 @@ case "$1" in
         ;;
 esac""", "/etc/init.d/docker")
     	run("chmod +x /etc/init.d/docker")
+    	run("insserv docker")
 
 
 

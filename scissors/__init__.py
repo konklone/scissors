@@ -5,7 +5,7 @@ from fabric.api import run, sudo, env, settings, local
 from fabric.context_managers import cd
 from util import putstring
 import fabric
-env.use_ssh_config = True
+
 
 
 
