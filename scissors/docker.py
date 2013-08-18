@@ -53,8 +53,8 @@ DOCKER_OPTS="-d=true"
 docker_start () {
     log_action_msg "Starting $DESC" "$NAME"
     set -e
-    start-stop-daemon --start --quiet --oknodo --pidfile "$PIDFILE" \
-        --exec "$DAEMON" -- $DOCKER_OPTS &
+    start-stop-daemon --background --start --quiet --oknodo --pidfile "$PIDFILE" \
+        --exec "$DAEMON" -- $DOCKER_OPTS
     echo $?
     log_end_msg $?
 }
@@ -120,6 +120,5 @@ def install_docker():
 	util.append("net.ipv4.ip_forward=1","/etc/sysctl.conf")
 	run("sysctl -p")
 
-	run("service docker start")
 	run("service docker start")
 	
