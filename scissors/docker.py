@@ -52,7 +52,7 @@ DOCKER_OPTS="-d=true"
 
 docker_start () {
     log_action_msg "Starting $DESC" "$NAME"
-
+    set -e
     start-stop-daemon --start --quiet --oknodo --pidfile "$PIDFILE" \
         --exec "$DAEMON" -- $DOCKER_OPTS &
     log_end_msg $?
@@ -104,15 +104,17 @@ def install_docker():
 	run("modprobe aufs")
 	util.debian_install("curl")
 	run("wget http://get.docker.io -O - | bash")
-	run("groupadd docker")
-	run("gpasswd -a deploy docker")
+	with settings(warn_only=True):
+		run("groupadd docker")
+		run("gpasswd -a deploy docker")
 
 	init_setup()
 
 	# https://github.com/dotcloud/docker/issues/431
 	util.append("none        /cgroup        cgroup        defaults    0    0","/etc/fstab")
-	run("mkdir -p /cgroup")
-	run("mount /cgroup")
+	with settings(warn_only=True):
+		run("mkdir -p /cgroup")
+		run("mount /cgroup")
 
 	util.append("net.ipv4.ip_forward=1","/etc/sysctl.conf")
 	run("sysctl -p")
