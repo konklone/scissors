@@ -19,7 +19,7 @@ APT::Periodic::Unattended-Upgrade "1";""","/etc/apt/apt.conf.d/10periodic")
 def firewall():
 	util.debian_install("ufw")
 	run("ufw allow 22")
-	run("sed -i /etc/default/ufw -e 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/g'") #https://github.com/dotcloud/docker/issues/1251
+	run("""sed -i /etc/default/ufw -e 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/g'""") #https://github.com/dotcloud/docker/issues/1251
 	run("ufw enable")
 
 def logwatch():
