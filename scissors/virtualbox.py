@@ -4,4 +4,4 @@ import fabric
 import util
 
 def install_virtualbox_additions():
-	util.debian_install_source("virtualbox-guest-additions")
+	util.debian_install_from_source("virtualbox-guest-additions")
