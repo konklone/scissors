@@ -55,6 +55,7 @@ docker_start () {
     set -e
     start-stop-daemon --start --quiet --oknodo --pidfile "$PIDFILE" \
         --exec "$DAEMON" -- $DOCKER_OPTS &
+    echo $?
     log_end_msg $?
 }
 docker_stop () {
