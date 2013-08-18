@@ -55,3 +55,12 @@ And now just deploy with
     git push production master
 
 
+# Hacking scissors
+
+A full Vagrant server is provided:
+
+    vagrant up
+
+Note that after the kernel is modified (eg.w ith scissors_config_server) you must reinstall the virtualbox-guest-additions.  To accomplish this, scissors supports the `install_virtualbox_additions` command.
+
+

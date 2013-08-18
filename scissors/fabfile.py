@@ -2,5 +2,6 @@
 from harden import harden
 from docker import install_docker
 from host import config_scissors_server, add_remote
+from virtualbox import install_virtualbox_additions
 import fabric.api
 fabric.api.env.use_ssh_config = True

@@ -57,6 +57,15 @@ def debian_install(what):
             return
     sudo('apt-get install -y %s' % what)
 
+def debian_install_from_source(what):
+    with settings(warn_only=True):
+        if run('dpkg -l | grep "%s\\s\\+"' % what).find(what) != -1:
+            print "dep %s already installed" % what
+            return
+    sudo('apt-get build-dep -y %s' % what)
+    sudo('apt-get -b source %s' % what)
+    sudo('dpkg -i %s*.deb' % what)
+
 def what_system():
     if run("ls /etc | grep debian_version").find("debian_version") != -1:
         return DEBIAN

@@ -114,7 +114,9 @@ def install_docker():
 	run("mkdir -p /cgroup")
 	run("mount /cgroup")
 
-	run("sysctl -w net.ipv4.ip_forward=1")
+	util.append("net.ipv4.ip_forward=1","/etc/sysctl.conf")
+	run("sysctl -p")
 
+	run("service docker start")
 	run("service docker start")
 	
