@@ -25,9 +25,9 @@ On other platforms (e.g. OSX) you can install scissors from pip, [if you have pi
 
 ## In development
 
-If you're developing any Docker applicaton and you want to run it on your Mac, we have pre-built Vagrant images that you can spin up that do exactly that.
+If you're developing any Docker application and you want to run it on your Mac, we have pre-built Vagrant images that you can spin up that do exactly that.
 
-Copy the prebuilt.Vagrantfile over to your project's respository.  Then just
+Copy the prebuilt Vagrantfile over to your project's repository.  Then just
 
     vagrant up
     vagrant ssh-config --host vagrant-deploy | sed -e 's/\(User\) vagrant/\1 deploy/g' >> ~/.ssh/config #configure normal SSH for use with vagrant
@@ -42,7 +42,7 @@ Spinning up a complete PaaS is as simple as:
 
     scissors -H [SSHSpec] config_scissors_host
 
-Where `SSHSpec` is something like `root@example.com`.  scissors will SSH into the server and configure everthing.  You can also use `localhost` as the spec.
+Where `SSHSpec` is something like `root@example.com`.  scissors will SSH into the server and configure everything.  You can also use `localhost` as the spec.
 
  (Note: At present, Debian requires a reboot to upgrade the kernel.  So you must run the command at least twice.)
 
@@ -61,6 +61,6 @@ A full Vagrant server is provided:
 
     vagrant up
 
-Note that after the kernel is modified (eg.w ith scissors_config_server) you must reinstall the virtualbox-guest-additions.  To accomplish this, scissors supports the `install_virtualbox_additions` command.
+Note that after the kernel is modified (eg. with scissors_config_server) you must reinstall the virtualbox-guest-additions.  To accomplish this, scissors supports the `install_virtualbox_additions` command.
 
 
